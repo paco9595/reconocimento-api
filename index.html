@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WEB access in HTML 5</title>
+
+</head>
+
+<body>
+    <center>
+        <video id="vidDisplay" autoplay="true">
+            No video support in your browser
+        </video>
+        <a href="#" id="capture">Identificate</a>
+        <canvas id="canvas" width="400" height="300"></canvas>
+    </center>
+    <script src="./jquery.min.js"></script>
+    <script type="text/javascript">
+        video = document.getElementById('vidDisplay')
+        canvas = document.getElementById('canvas');
+        context = canvas.getContext('2d');
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia({ video: true }, handleVideo, videoError);
+        }
+
+        function handleVideo(stream) {
+            document.querySelector('#vidDisplay').src = window.URL.createObjectURL(stream);
+        }
+
+        function videoError(e) {
+            alert("There has some problem ...");
+        }
+        document.getElementById('capture').addEventListener('click', function () {
+            context.drawImage(video, 0, 0, 400, 300);
+            var dataURL = canvas.toDataURL();
+            $.ajax({
+                type: "POST",
+                url: 'http://localhost:3000/',
+                headers: {
+                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+                    'contentType': 'application/x-www-form-urlencoded',
+                },
+                data: { url:dataURL }
+            }).done(function (msg) {
+                alert(msg);
+            });
+        });
+    </script>
+</body>
+
+</html>
