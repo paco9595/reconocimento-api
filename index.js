@@ -23,7 +23,7 @@ app.post('/', function (req, res) {
         console.log('File created');
         exec("python hola.py", function (err, stdout, stderr) {
             if (err) return res.status(500).send({ msg: 'error al ejecutar' })
-            console.log(stdout);
+            return res.status(200).send({ans: stdout})
         });
     });
 });

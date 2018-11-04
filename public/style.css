@@ -1,0 +1,36 @@
+.back{
+    height: 100Vh;
+    background-image: url('./background.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.row { 
+    height: 100%;
+}
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#video {
+    border: 15px solid white;
+    border-width: 15px 8px 15px 8px;
+    background-color: white;
+}
+#canvas {
+    display: none;
+}
+img {
+    height: 50%;
+    width: 50%;
+    max-width: 200px;
+    max-height: 200px;
+    margin: 50px;
+}
+.check {
+    justify-content: flex-start
+}
+.hide {
+    visibility: hidden;
+}

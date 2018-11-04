@@ -3,17 +3,32 @@
 
 <head>
     <title>WEB access in HTML 5</title>
-
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
 </head>
 
 <body>
-    <center>
-        <video id="vidDisplay" autoplay="true">
-            No video support in your browser
-        </video>
-        <a href="#" id="capture">Identificate</a>
-        <canvas id="canvas" width="400" height="300"></canvas>
-    </center>
+    <div class="container-fluid back">
+        <div class="row flex">
+            <div class="col-7 flex">
+                <video id="vidDisplay" autoplay="true">
+                    No video support in your browser
+                </video>
+                <canvas id="canvas"></canvas>
+            </div>
+            <div class="col-1">
+                <a href="#" id="capture">Identificate</a>
+            </div>
+            <div class="col-4">
+                <div id="yes" class="flex check hide">
+                    <img src="./CheckMark-good.png" alt="" srcset="">
+                </div>
+                <div id="no" class="flex check hide ">
+                    <img src="./CheckMark-bad.png" alt="" srcset="">
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="./jquery.min.js"></script>
     <script type="text/javascript">
         video = document.getElementById('vidDisplay')
@@ -41,9 +56,16 @@
                     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
                     'contentType': 'application/x-www-form-urlencoded',
                 },
-                data: { url:dataURL }
-            }).done(function (msg) {
-                alert(msg);
+                data: { url: dataURL }
+            }).done(function (data) {
+                if (data.ans) {
+                    document.getElementById('yes').classList.remove("hide")
+                    document.getElementById('no').classList.add("hide")
+
+                } else {
+                    document.getElementById('no').classList.remove("hide")
+                    document.getElementById('yes').classList.add("hide")
+                }
             });
         });
     </script>
