@@ -58,7 +58,7 @@
                 },
                 data: { url: dataURL }
             }).done(function (data) {
-                if (data.ans) {
+                if (data.ans == 'true') {
                     document.getElementById('yes').classList.remove("hide")
                     document.getElementById('no').classList.add("hide")
 
