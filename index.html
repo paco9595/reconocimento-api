@@ -14,7 +14,7 @@
                 <video id="vidDisplay" autoplay="true">
                     No video support in your browser
                 </video>
-                <canvas id="canvas"></canvas>
+                <canvas id="canvas" width="400" height="300"></canvas>
             </div>
             <div class="col-1">
                 <a href="#" id="capture">Identificate</a>
@@ -49,6 +49,7 @@
         document.getElementById('capture').addEventListener('click', function () {
             context.drawImage(video, 0, 0, 400, 300);
             var dataURL = canvas.toDataURL();
+            console.log(dataURL)
             $.ajax({
                 type: "POST",
                 url: 'http://localhost:3000/',

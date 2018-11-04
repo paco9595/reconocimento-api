@@ -20,7 +20,6 @@ app.post('/', function (req, res) {
     const img = url.split(';base64,').pop();
     fs.writeFile('./img/img.png', img, { encoding: 'base64' }, function (err) {
         if (err) return res.status(500).send({ msg: 'imagen no gusrdad' })
-        console.log('File created');
         exec("python hola.py", function (err, stdout, stderr) {
             if (err) return res.status(500).send({ msg: 'error al ejecutar' })
             return res.status(200).send({ans: stdout})
